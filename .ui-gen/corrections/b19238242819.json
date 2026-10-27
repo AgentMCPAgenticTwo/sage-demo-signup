@@ -1,0 +1,66 @@
+{
+  "trace_id": "b19238242819",
+  "branch": "ui-correction/b19238242819",
+  "maintenance_branch": "ui-correction/b19238242819",
+  "status": "SUCCESS",
+  "summary": "Added a \"Forgot password?\" link under the log in form and a new `/reset-password` page (`src/pages/ResetPassword.jsx`, registered in `App.jsx`) where the user enters their email plus a new password and confirmation; it updates the stored account via the existing `store.js` helpers and returns to the log in page. Reading taken: the reset is a direct email + new password form (no emailed token), matching this demo's local-store auth.",
+  "files_changed": [
+    "src/App.jsx",
+    "src/pages/Login.jsx",
+    "src/pages/ResetPassword.jsx"
+  ],
+  "lines_changed": 46,
+  "blockers": [],
+  "conventions": [
+    "Password reset asks for email + new password + confirmation; unknown email reports 'No account with this email exists.' and mismatch reports 'Passwords do not match.', shown in the shared Message alert",
+    "New pages are a component in src/pages/ registered under their kebab-cased path in the routes map in App.jsx"
+  ],
+  "visual_check": {
+    "verdict": "pass",
+    "evidence": "The log in page shows a 'Forgot password?' link below the Log in button, and /reset-password renders a 'Reset your password' card with Email, New password, and Confirm new password fields plus a Reset password button and a back-to-log-in link.",
+    "screenshot_path": "/tmp/actual.png"
+  },
+  "context_sharing": {
+    "target": "frontend",
+    "branch": "ui-correction/b19238242819",
+    "base_path": "",
+    "endpoints": [],
+    "types": {
+      "User": [
+        {
+          "name": "email",
+          "type": "string"
+        },
+        {
+          "name": "password",
+          "type": "string"
+        }
+      ],
+      "ResetPasswordForm": [
+        {
+          "name": "email",
+          "type": "string"
+        },
+        {
+          "name": "password",
+          "type": "string"
+        },
+        {
+          "name": "confirm",
+          "type": "string"
+        }
+      ]
+    },
+    "notes": "There is no HTTP API here: all persistence goes through src/store.js against localStorage (key 'acme-users') and sessionStorage (key 'acme-current'), via findUser(email), saveUser(user), setCurrentUser(email), currentUser(). The only paths are client-side routes in src/App.jsx: '/signup', '/login', '/welcome', '/reset-password', with any unknown path falling back to Signup. Emails are keyed trimmed and lowercased; the User object may carry additional fields written by Signup, which this correction did not read."
+  },
+  "usage": {
+    "num_turns": 14,
+    "duration_ms": 32409,
+    "total_cost_usd": 0.1895286,
+    "input_tokens": 2628,
+    "output_tokens": 2481,
+    "cache_creation_input_tokens": 12494,
+    "cache_read_input_tokens": 228062,
+    "is_error": false
+  }
+}
