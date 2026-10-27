@@ -1,0 +1,86 @@
+{
+  "trace_id": "dcc6001b8cf9",
+  "branch": "ui-correction/dcc6001b8cf9",
+  "maintenance_branch": "ui-correction/dcc6001b8cf9",
+  "status": "SUCCESS",
+  "summary": "Added the password rules to the sign-up page: the five rules render as hint text under the password field, and on submit each unmet rule produces its own error line in a single alert list, checked before the existing match/duplicate-email checks. Rules and `passwordErrors` are exported from `Signup.jsx`.",
+  "files_changed": [
+    "src/pages/Signup.jsx",
+    "src/style.css"
+  ],
+  "lines_changed": 46,
+  "blockers": [],
+  "conventions": [
+    "Sign-up passwords must be >= 8 characters and contain at least one uppercase letter, one lowercase letter, one number and one special character (any non-alphanumeric); each unmet rule is reported as its own error line."
+  ],
+  "visual_check": {
+    "verdict": "pass",
+    "evidence": "The signup page shows a bulleted rule list directly under the Password field listing all five rules (8 characters, uppercase, lowercase, number, special character), styled as hint text within the card.",
+    "screenshot_path": "/tmp/actual.png"
+  },
+  "context_sharing": {
+    "target": "frontend",
+    "branch": "ui-correction/dcc6001b8cf9",
+    "base_path": "",
+    "endpoints": [],
+    "types": {
+      "User": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "email",
+          "type": "string"
+        },
+        {
+          "name": "password",
+          "type": "string"
+        }
+      ],
+      "SignupForm": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "email",
+          "type": "string"
+        },
+        {
+          "name": "password",
+          "type": "string"
+        },
+        {
+          "name": "confirm",
+          "type": "string"
+        }
+      ],
+      "PasswordRule": [
+        {
+          "name": "hint",
+          "type": "string"
+        },
+        {
+          "name": "error",
+          "type": "string"
+        },
+        {
+          "name": "test",
+          "type": "unknown"
+        }
+      ]
+    },
+    "notes": "There is no HTTP API here: signup persists entirely to localStorage under the key 'acme-users' (keyed by lowercased, trimmed email) via saveUser/findUser in src/store.js, with the session pointer in sessionStorage key 'acme-current'. Client-side routes used are '/login' (navigate and Link target); no network endpoints exist to consume."
+  },
+  "usage": {
+    "num_turns": 9,
+    "duration_ms": 31135,
+    "total_cost_usd": 0.2773044,
+    "input_tokens": 2499,
+    "output_tokens": 2539,
+    "cache_creation_input_tokens": 28289,
+    "cache_read_input_tokens": 203928,
+    "is_error": false
+  }
+}

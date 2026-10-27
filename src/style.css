@@ -72,9 +72,20 @@ button {
   cursor: pointer;
 }
 
+.hints {
+  margin: -6px 0 0;
+  padding-left: 18px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
 .message {
   margin: 0;
   font-size: 14px;
+}
+
+ul.message {
+  padding-left: 18px;
 }
 
 .message.error {
