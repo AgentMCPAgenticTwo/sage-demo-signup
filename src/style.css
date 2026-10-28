@@ -7,7 +7,9 @@
   --accent: #2563eb;
   --error: #b42318;
   --ok: #067647;
-  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --accent-dark: #1d4ed8;
+  --shadow: 0 10px 30px rgba(23, 33, 43, 0.08);
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   color: var(--ink);
   background: var(--bg);
 }
@@ -26,9 +28,10 @@ body {
   max-width: 400px;
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 28px;
+  border-radius: 16px;
+  padding: 32px;
   box-sizing: border-box;
+  box-shadow: var(--shadow);
 }
 
 h1 {
@@ -53,23 +56,34 @@ input {
   color: var(--ink);
   padding: 10px 12px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 10px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 input:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
 }
 
 button {
   font: inherit;
   font-weight: 600;
-  padding: 11px;
+  padding: 12px;
   border: 0;
-  border-radius: 8px;
+  border-radius: 10px;
   background: var(--accent);
   color: #fff;
   cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+button:hover {
+  background: var(--accent-dark);
+}
+
+button:active {
+  transform: translateY(1px);
 }
 
 .message {
@@ -93,4 +107,12 @@ button {
 
 a {
   color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-dark);
+  text-decoration: underline;
 }
