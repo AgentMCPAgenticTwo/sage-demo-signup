@@ -28,6 +28,9 @@ export default function Login() {
         <button type="submit">Log in</button>
       </form>
       <p className="switch">
+        <Link to="/reset-password">Forgot password?</Link>
+      </p>
+      <p className="switch">
         New here? <Link to="/signup">Create an account</Link>
       </p>
     </Card>

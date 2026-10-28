@@ -85,6 +85,17 @@ button {
   color: var(--ok);
 }
 
+.rules {
+  margin: -4px 0 0;
+  padding-left: 18px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.rule.error {
+  color: var(--error);
+}
+
 .switch {
   margin: 18px 0 0;
   font-size: 14px;
