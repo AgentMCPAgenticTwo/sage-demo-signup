@@ -15,6 +15,9 @@ export default function Welcome() {
     <Card title={`Welcome, ${user.name || user.email}`}>
       <p>You are signed in.</p>
       <p className="switch">
+        <Link to="/change-password">Change password</Link>
+      </p>
+      <p className="switch">
         <Link to="/login">Log out</Link>
       </p>
     </Card>
