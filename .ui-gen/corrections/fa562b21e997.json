@@ -1,0 +1,68 @@
+{
+  "trace_id": "fa562b21e997",
+  "branch": "ui-correction/fa562b21e997",
+  "maintenance_branch": "ui-correction/fa562b21e997",
+  "status": "SUCCESS",
+  "summary": "Added a \"Forgot password?\" link on the log in page and a `/reset-password` page (email + new password) that updates the stored account and returns the user to log in. Build passes.\n\nReading taken: the smaller one — the reset page takes just the two fields the request names (email, new password), with no token/confirm-field flow. Applied the project's existing password rules: the five rules render as a muted hint list under the new-password field and unmet rules turn error-coloured on submit, which blocks the reset. The password rules live in a new shared `src/components/PasswordRules.jsx` so the sign-up page can use the same list. Any real token-based reset mail/verification belongs to the backend repository and was not faked here.",
+  "files_changed": [
+    "src/App.jsx",
+    "src/components/PasswordRules.jsx",
+    "src/pages/Login.jsx",
+    "src/pages/ResetPassword.jsx",
+    "src/style.css"
+  ],
+  "lines_changed": 86,
+  "blockers": [
+    "Not applied -- Emailing a reset link / token verification: belongs to the backend repository; not stubbed here"
+  ],
+  "conventions": [
+    "Passwords must be at least 8 characters and contain at least one uppercase letter, one lowercase letter, one number and one special character (any non-alphanumeric)",
+    "Wherever a password is chosen (sign up, reset), the five rules are always displayed under the password field and unmet rules are marked in error colour on submit, blocking submission",
+    "Password rules and their checks come from src/components/PasswordRules.jsx — do not re-declare them per page",
+    "Pages are components in src/pages/ registered by path in the src/App.jsx routes map"
+  ],
+  "visual_check": {
+    "verdict": "pass",
+    "evidence": "The login page shows a 'Forgot password?' link under the Log in button, and /reset-password renders a 'Reset your password' card with Email and New password fields plus the five project password rules displayed under the password field as muted hints.",
+    "screenshot_path": "/tmp/actual.png"
+  },
+  "context_sharing": {
+    "target": "frontend",
+    "branch": "ui-correction/fa562b21e997",
+    "base_path": "",
+    "endpoints": [],
+    "types": {
+      "User": [
+        {
+          "name": "email",
+          "type": "string"
+        },
+        {
+          "name": "password",
+          "type": "string"
+        }
+      ],
+      "PasswordRule": [
+        {
+          "name": "label",
+          "type": "string"
+        },
+        {
+          "name": "test",
+          "type": "unknown"
+        }
+      ]
+    },
+    "notes": "These files implement and consume no HTTP API — there is no fetch/XHR and no server call anywhere in them. All state lives client-side in localStorage under the key 'acme-users' (a map of lowercased, trimmed email -> User) and sessionStorage under 'acme-current' (the current user's email), via src/store.js (findUser, saveUser, setCurrentUser, currentUser). The only 'paths' are client-side routes in src/App.jsx: '/signup', '/login', '/welcome', '/reset-password', resolved from window.location.pathname with '/signup' as the fallback; any dev/prod server must serve the SPA for all of these. Password rules are defined once in src/components/PasswordRules.jsx and matched by exact label string, so any server-side validation must use the same five labels character for character."
+  },
+  "usage": {
+    "num_turns": 17,
+    "duration_ms": 51835,
+    "total_cost_usd": 0.32020499999999996,
+    "input_tokens": 2646,
+    "output_tokens": 3843,
+    "cache_creation_input_tokens": 31529,
+    "cache_read_input_tokens": 214480,
+    "is_error": false
+  }
+}
