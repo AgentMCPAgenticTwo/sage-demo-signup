@@ -7,7 +7,7 @@
   --accent: #2563eb;
   --error: #b42318;
   --ok: #067647;
-  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   color: var(--ink);
   background: var(--bg);
 }
@@ -26,9 +26,10 @@ body {
   max-width: 400px;
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 28px;
   box-sizing: border-box;
+  box-shadow: 0 10px 30px rgba(23, 33, 43, 0.08);
 }
 
 h1 {
@@ -53,12 +54,14 @@ input {
   color: var(--ink);
   padding: 10px 12px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 10px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 input:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
 }
 
 button {
@@ -66,10 +69,21 @@ button {
   font-weight: 600;
   padding: 11px;
   border: 0;
-  border-radius: 8px;
+  border-radius: 10px;
   background: var(--accent);
   color: #fff;
   cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  background: #1d4fd7;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+  transform: translateY(-1px);
+}
+
+a {
+  transition: color 0.2s ease;
 }
 
 .message {
