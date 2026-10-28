@@ -1,0 +1,87 @@
+{
+  "trace_id": "54204957e536",
+  "branch": "ui-correction/54204957e536",
+  "maintenance_branch": "ui-correction/54204957e536",
+  "status": "SUCCESS",
+  "summary": "Added a `/change-password` page for signed-in users, linked from the welcome page.\n\n- `src/pages/ChangePassword.jsx` (new): current password, new password, confirm new password. Redirects to `/login` if nobody is signed in (same guard as Welcome), verifies the current password, then updates the stored account via `saveUser` and returns to `/welcome`.\n- `src/components/PasswordRules.jsx` (new): the project's five password rules and their check, per the recorded convention that rules live in one shared module rather than being re-declared per page. This repo's branch didn't yet have the file, so I created it; the new-password field shows the rules as a muted hint list and unmet rules turn error-coloured on submit, blocking the change.\n- `src/App.jsx`: registered `/change-password` in the routes map. `src/pages/Welcome.jsx`: \"Change password\" link. `src/style.css`: `.rules` / `.rule-failed`.\n\nReading taken: the smaller one — a single page under the existing localStorage demo store, no backend call. Build passes.",
+  "files_changed": [
+    "src/App.jsx",
+    "src/components/PasswordRules.jsx",
+    "src/pages/ChangePassword.jsx",
+    "src/pages/Welcome.jsx",
+    "src/style.css"
+  ],
+  "lines_changed": 120,
+  "blockers": [
+    "Not applied -- Server-side password change endpoint: belongs to the separate backend repository; this app's demo account store is localStorage-only, matching existing sign-up/log-in"
+  ],
+  "conventions": [
+    "Passwords must be at least 8 characters and contain at least one uppercase letter, one lowercase letter, one number and one special character (any non-alphanumeric)",
+    "Wherever a password is chosen (sign up, reset, change), the five rules are always displayed under the password field and unmet rules are marked in error colour on submit, blocking submission",
+    "Password rules and their checks come from src/components/PasswordRules.jsx — do not re-declare them per page",
+    "Pages are components in src/pages/ registered by path in the src/App.jsx routes map",
+    "Pages that require a signed-in user redirect to /login when currentUser() is null"
+  ],
+  "visual_check": {
+    "verdict": "skipped",
+    "evidence": "verifier did not return parseable JSON",
+    "screenshot_path": ""
+  },
+  "context_sharing": {
+    "target": "frontend",
+    "branch": "ui-correction/54204957e536",
+    "base_path": "",
+    "endpoints": [],
+    "types": {
+      "User": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "email",
+          "type": "string"
+        },
+        {
+          "name": "password",
+          "type": "string"
+        }
+      ],
+      "Rule": [
+        {
+          "name": "label",
+          "type": "string"
+        },
+        {
+          "name": "test",
+          "type": "unknown"
+        }
+      ],
+      "ChangePasswordForm": [
+        {
+          "name": "current",
+          "type": "string"
+        },
+        {
+          "name": "password",
+          "type": "string"
+        },
+        {
+          "name": "confirm",
+          "type": "string"
+        }
+      ]
+    },
+    "notes": "There is no HTTP API here at all: these files implement a client-only React SPA whose persistence is localStorage key 'acme-users' (email-keyed map of User) and sessionStorage key 'acme-current' (email string), via src/store.js (findUser, saveUser, setCurrentUser, currentUser). The only 'paths' are client-side routes in src/App.jsx: '/signup', '/login', '/welcome', '/change-password', with any unknown path falling back to Signup. Password rules (8+ chars, uppercase, lowercase, number, special) are enforced only in src/components/PasswordRules.jsx on the client, so any server counterpart must re-validate them independently."
+  },
+  "usage": {
+    "num_turns": 16,
+    "duration_ms": 53166,
+    "total_cost_usd": 0.3086995,
+    "input_tokens": 2642,
+    "output_tokens": 4386,
+    "cache_creation_input_tokens": 16009,
+    "cache_read_input_tokens": 457245,
+    "is_error": false
+  }
+}
