@@ -1,0 +1,12 @@
+{
+    "schema_version": 2,
+    "commit": "af0eb7e28c6d901616970ef2450db466024c0fd3",
+    "indexed_at": "2026-10-28T00:35:21Z",
+    "project": "sage-demo-signup",
+    "nodes": 118,
+    "edges": 173,
+    "original_size": 1835008,
+    "compressed_size": 70200,
+    "compression_level": 9,
+    "reconcile_basis": "git-clean-head"
+}
